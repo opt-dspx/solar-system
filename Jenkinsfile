@@ -1,7 +1,16 @@
 pipeline {
     agent any
     
-   
+   triggers {
+    GenericTrigger(
+        genericVariables: [
+            [key: 'ref', value: '$.ref'],
+            [key: 'repo', value: '$.repository.name']
+        ],
+        causeString: 'Triggered by GitHub Webhook',
+        printPostContent: true
+    )
+}
     stages {
         stage('VM Node Version') {
             steps {
