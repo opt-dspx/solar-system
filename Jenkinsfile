@@ -6,6 +6,9 @@ pipeline {
             steps {
                sh 'npm install --no-audit '
             }
+            steps {
+               sh 'npm fund'
+            }
         }
     }
 }
