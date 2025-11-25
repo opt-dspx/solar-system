@@ -2,13 +2,9 @@ pipeline {
     agent any
     
     stages {
-        stage('VM Node Version') {
+        stage('Instaling Dependencies') {
             steps {
-                sh '''
-                    echo "Checking Node.js and npm versions on the VM node...."
-                    node -v
-                    npm -v
-                '''
+               sh 'npm install --no-audit '
             }
         }
     }
