@@ -4,11 +4,13 @@ pipeline {
     stages {
         stage('Instaling Dependencies') {
             steps {
-               sh 'npm install --no-audit '
+               sh ''
+               npm install --no-audit 
+               npm fund 
+               ''
+
             }
-            steps {
-               sh 'npm fund'
-            }
+           
         }
     }
 }
