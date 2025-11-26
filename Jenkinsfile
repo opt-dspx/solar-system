@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    
     stages {
 
         stage('Installing Dependencies') {
@@ -12,31 +12,27 @@ pipeline {
             }
         }
 
-        stage('Security Checks in Parallel') {
+        stage('Security Checks') {
             parallel {
 
-                NPM_Audit: {
-                    stage('NPM Dependencies Audit') {
-                        steps {
-                            sh '''
-                                npm audit --audit-level=critical
-                                echo $?
-                            '''
-                        }
+                stage('NPM Audit') {
+                    steps {
+                        sh '''
+                            npm audit --audit-level=critical
+                            echo $?
+                        '''
                     }
                 }
 
-                OWASP_Check: {
-                    stage('OWASP Dependency Check') {
-                        steps {
-                            dependencyCheck additionalArguments: '''
-                                --scan ./
-                                --out ./
-                                --format ALL
-                                --prettyPrint
-                            ''',
-                            odcInstallation: 'OWASP-DepCheck-10'
-                        }
+                stage('OWASP Dependency Check') {
+                    steps {
+                        dependencyCheck additionalArguments: '''
+                            --scan ./
+                            --out ./
+                            --format ALL
+                            --prettyPrint
+                        ''',
+                        odcInstallation: 'OWASP-DepCheck-10'
                     }
                 }
             }
