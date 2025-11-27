@@ -8,14 +8,7 @@ pipeline {
     
     stages {
 
-        stage('Installing Dependencies') {
-            steps {
-                sh '''
-                    npm install --no-audit
-                    npm fund
-                '''
-            }
-        }
+      
 
         stage('Security Checks') {
             parallel {
