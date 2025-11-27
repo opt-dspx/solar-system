@@ -1,5 +1,14 @@
 pipeline {
     agent any
+
+    environment {
+        SONAR_SCANNER_HOME = TOOL 'sonraqube-scanner-730'
+        MONGO_URI = "mongodb+srv://supercluster.d83jj.mongodb.net/superData"
+        MONGO_DB_CREDS = credentials('mongo-db-credentials')
+        MONGO_USERNAME = credentials('mongo-db-username')
+        MONGO_PASSWORD = credentials('mongo-db-password')
+
+    }
     
     stages {
 
@@ -55,6 +64,18 @@ pipeline {
                 ])
             }
         }
-
+        stage('SAST - SonraQube') {
+            steps {
+                sh 'echo $SONAR_SCANNER_HOME'
+                sh '''
+                    $SONAR_SCANNER_HOME/bin/sonar-scanner \
+                      -Dsonar.projectKey=Solar-System-Project \
+                      -Dsonar.sources=. \
+                      -Dsonar.host.url=http://109.207.175.65:9000 \
+                      -Dsonar.token=sqp_4aad086848c884e8eb1b3bd5b1a8083eaaabd410
+                    
+                '''
+            }
+        }
     }
 }
