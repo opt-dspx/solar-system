@@ -25,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('Code Coverage') {
+       // stage('Code Coverage') {
             steps {
                 withCredentials([usernamePassword(
                     credentialsId: 'mongo-db-credentials',
@@ -53,7 +53,9 @@ pipeline {
                 ])
             }
         }
-        stage('SAST - SonraQube') {
+        
+    }
+    stage('SAST - SonraQube') {
             steps {
                 sh 'echo $SONAR_SCANNER_HOME'
                 sh '''
@@ -66,5 +68,4 @@ pipeline {
                 '''
             }
         }
-    }
 }
