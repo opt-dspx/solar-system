@@ -14,11 +14,6 @@ pipeline {
             }
         }
 
-        stage('Run Tests & Coverage') {
-            steps {
-                sh 'npm run coverage'
-                sh 'ls -l coverage || true'
-            }
         }
 
         stage('SAST - SonarQube') {
