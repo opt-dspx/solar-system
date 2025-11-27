@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh '''
                     $SONAR_SCANNER_HOME/bin/sonar-scanner \
-                      -Dsonar.projectKey=Solar-System-Project \
+                      -Dsonar.projectKey=12312d31123123 \
                       -Dsonar.sources=. \
                       -Dsonar.host.url=http://109.207.175.65:9000 \
                       -Dsonar.token=$SONAR_TOKEN
